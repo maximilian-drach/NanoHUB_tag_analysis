@@ -4,7 +4,7 @@ import pandas as pd
 import sys
 
 def create_df(TSV_path):
-    df_tagsobj = pd.read_csv(f'{TSV_path}/tag_obj.tsv', sep='\t')
+    df_tagsobj = pd.read_csv(f'{TSV_path}/tags_obj.tsv', sep='\t')
     df_tags = pd.read_csv(f'{TSV_path}/tags.tsv', sep='\t')
 
     return df_tagsobj, df_tags
