@@ -3,9 +3,9 @@ import numpy as np
 import pandas as pd
 import sys
 
-def create_df(tag_obj, tags):
-    df_tagsobj = pd.read_csv(tag_obj, sep='\t')
-    df_tags = pd.read_csv(tags, sep='\t')
+def create_df(TSV_path):
+    df_tagsobj = pd.read_csv(f'{TSV_path}/tag_obj.tsv', sep='\t')
+    df_tags = pd.read_csv(f'{TSV_path}/tags.tsv', sep='\t')
 
     return df_tagsobj, df_tags
 
@@ -85,8 +85,10 @@ def tag_indexes(tagid, tags_obj_df, tags_df):
     
     return df
 
-def tag_association_tsv_print(tags_objTSV, tagsTSV, tag, path):
-    tags_obj, tags = create_df(tags_objTSV, tagsTSV)
+
+def tag_association_tsv_print(TSV_path, tag):
+
+    tags_obj, tags = create_df(TSV_path)
     tags_obj = RandC_filter(tags_obj)
     tags = lowercase_nspace_tags(tags)
 
@@ -99,8 +101,8 @@ def tag_association_tsv_print(tags_objTSV, tagsTSV, tag, path):
     frequencyDF = frequencyDF.merge(tags, left_on='tagid', right_on="id")[['raw_tag','frequency', 'tagid']].sort_values(['frequency'], ascending=False)
     print(frequencyDF.to_csv(sep="\t", index=False))
 
-def tag_association_tsv(tags_objTSV, tagsTSV, tag, path):
-    tags_obj, tags = create_df(tags_objTSV, tagsTSV)
+def tag_association_tsv(TSV_path, tag, path):
+    tags_obj, tags = create_df(TSV_path)
     tags_obj = RandC_filter(tags_obj)
     tags = lowercase_nspace_tags(tags)
 
